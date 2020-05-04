@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #trigger {
+                background:red;
+                width:100px;
+                height:100px
+            }
+        </style>
+    </head>
+    <body>
+
+        <div id="trigger"></div>
+
+        <button class="time-button">The time is?</button>
+        <button class="time-button">The time is?</button>
+        <button class="time-button">The time is?</button>
+        <button class="time-button">The time is?</button>
+
+        <p id="demo"></p>
+        <input type="text" id="source" placeholder="what to do?">
+        <button>Go!</button>
+        <ul id="target"></ul>
+        <script>
+
+            document
+                .querySelector("#trigger")
+                .addEventListener('mouseenter', function(){
+                    document.getElementById('demo').innerHTML=Date()
+                });
+
+            document
+                .querySelector("#trigger")
+                .addEventListener('mouseleave', function(){
+                    document.getElementById('demo').innerHTML=''
+                })
+
+            // var buttons = document
+            //     .querySelectorAll(".time-button")
+            // for (let i = 0; i < buttons.length; i++) {
+            //     const element = buttons[i];
+            //     element.addEventListener('click',()=>{
+            //         document.getElementById('demo').innerHTML=Date()
+            //     })
+            // }
+
+            document
+                .querySelectorAll(".time-button")
+                .forEach(function(el,idx,arr){
+                    el.addEventListener('click',function(event){
+                        // console.log(event.target)
+                        document.body.removeChild(event.target)
+                        document.getElementById('demo').innerHTML=Date()
+                    })  
+                })
+
+            // function shout(age,name){
+            //     console.log(`HEIII NAMA SAYA ${name} UMUR ${age} TAHUN!`)
+            // }
+
+            // shout('aldy',17)
+            // shout(17,'aldy')
+
+            document
+                .querySelector('#source')
+                .addEventListener('keyup',function(event){
+                    // console.log(event.key)
+                    // console.log(event.target.value)
+                })
+
+            document
+                .querySelector('#source')
+                .nextElementSibling
+                .addEventListener('click',()=>{
+                    var textValue = document.querySelector('#source').value;
+                    var listItem = document.createElement('li');
+                    var listText = document.createTextNode(textValue);
+                    listItem.append(listText);
+                    document.querySelector('#target').append(listItem);
+                    document.querySelector('#source').value = "";
+                })
+                
+        </script>
+
+    </body>
+</html>
